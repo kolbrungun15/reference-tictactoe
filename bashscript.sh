@@ -52,7 +52,7 @@ cp docker-run.sh ./build/
 cd build
 echo Building docker image
 
-sudo docker build -t hrafnhildurs/tictactoe .
+sudo docker build -t kollagunn/tictactoe .
 
 rc=$?
 if [[ $rc != 0 ]] ; then
@@ -60,11 +60,11 @@ if [[ $rc != 0 ]] ; then
     exit $rc
 fi
 
-sudo docker push hrafnhildurs/tictactoe
-rc=$?
-if [[ $rc != 0 ]] ; then
-    echo "Docker push failed " $rc
-    exit $rc
-fi
+#sudo docker push kollagunn/tictactoe
+#rc=$?
+#if [[ $rc != 0 ]] ; then
+#    echo "Docker push failed " $rc
+#    exit $rc
+#fi
 
 echo "Done"

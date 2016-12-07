@@ -1,9 +1,8 @@
 FROM node
 WORKDIR /code
 COPY package.json .
+COPY . .
 RUN npm install --silent
-COPY index.js .
-COPY ./test/ /code/test
 EXPOSE 3000
-CMD ["node","index.js"]
-ENV NODE PATH=.
+ENV NODE_PATH .
+CMD ["./docker-run.sh"]
