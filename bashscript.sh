@@ -60,11 +60,11 @@ if [[ $rc != 0 ]] ; then
     exit $rc
 fi
 
-#sudo docker push kollagunn/tictactoe
-#rc=$?
-#if [[ $rc != 0 ]] ; then
-#    echo "Docker push failed " $rc
-#    exit $rc
-#fi
+sudo docker push kollagunn/tictactoe
+rc=$?
+if [[ $rc != 0 ]] ; then
+    echo "Docker push failed " $rc
+    exit $rc
+fi
 
 echo "Done"
