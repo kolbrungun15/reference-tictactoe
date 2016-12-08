@@ -4,9 +4,10 @@
 # - build a docker image which includes the build output - not including node-modules.
 # - runs npm install for the server.
 
-echo Cleaning...
-rm -rf ./dist
+echo Cleaning... # Skrifar útá skjá "cleaning"
+rm -rf ./build    #eyðir núvendandi build möppu
 
+#sækir textann sem tilheyrir nýjasta committi á git og merkir imageið með sama texta svo hægt sér að rollbacka.
 if [ -z "$GIT_COMMIT" ]; then
   export GIT_COMMIT=$(git rev-parse HEAD)
   export GIT_URL=$(git config --get remote.origin.url)
@@ -16,22 +17,28 @@ fi
 export GITHUB_URL=$(echo $GIT_URL | rev | cut -c 5- | rev)
 
 
-echo Building app
-npm run build
+echo Building app  #skrifar út á skjá "Building app"
+npm run build #buildar verkefnið
 
+#ef build failar þá er skrifað út á skjá :"Npm build failed with exit code "
 rc=$?
 if [[ $rc != 0 ]] ; then
     echo "Npm build failed with exit code " $rc
     exit $rc
 fi
 
-mkdir dist
-cat > ./dist/githash.txt <<_EOF_
+
+mkdir build #býr til nýja build möppu
+
+#taggið á commitinu sett inn í tímabundna textastrá
+cat > ./build/githash.txt <<_EOF_ #
 $GIT_COMMIT
 _EOF_
 
-mkdir dist/public
-cat > ./dist/public/version.html << _EOF_
+
+mkdir build/public #Býr til public möppu inní build
+#býr til html skjal
+cat > ./build/public/version.html << _EOF_
 <!doctype html>
 <head>
    <title>App version information</title>
@@ -45,26 +52,28 @@ cat > ./dist/public/version.html << _EOF_
 _EOF_
 
 
-cp ./Dockerfile ./build/
-cp ./package.json ./build/
-cp docker-run.sh ./build/
+cp ./Dockerfile ./build/ #copy-ar docker file skjalið og setur inn í build möppuna
+cp ./package.json ./build/ #copy-ar package.json og setur inn'i build möppuna 
+cp docker-run.sh ./build/ #copy-ar docker-run og setur inn í build möppuna
 
-cd build
-echo Building docker image
+cd build #fer inn í build möppuna
+echo Building docker image #skrifar út á skjáinn "Building docker image"
 
-sudo docker build -t kollagunn/tictactoe .
+docker build -t kollagunn/tictactoe . #docker build 
 
+#Skrifar út á skjá ef buildið feilar
 rc=$?
 if [[ $rc != 0 ]] ; then
     echo "Docker build failed " $rc
     exit $rc
 fi
 
-sudo docker push kollagunn/tictactoe
+#pushar inn á docker
+docker push kollagunn/tictactoe
 rc=$?
 if [[ $rc != 0 ]] ; then
     echo "Docker push failed " $rc
     exit $rc
 fi
 
-echo "Done"
+echo "Done

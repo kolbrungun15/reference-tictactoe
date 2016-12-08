@@ -1,7 +1,7 @@
 #!/bin/bash
-set -e
+set -e #stoppar strax ef villa kemur upp	
 
-sleep 10
+sleep 10 #stoppar scriptuna í 10 sek á meðan dockerfile er að vinna
 npm run migradedb
 node run.js
 
