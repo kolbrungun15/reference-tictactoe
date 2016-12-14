@@ -5,7 +5,7 @@
 # - runs npm install for the server.
 
 echo Cleaning... # Skrifar útá skjá "cleaning"
-rm -rf ./build    #eyðir núvendandi build möppu
+sudo rm -rf ./build    #eyðir núvendandi build möppu
 
 #sækir textann sem tilheyrir nýjasta committi á git og merkir imageið með sama texta svo hægt sér að rollbacka.
 if [ -z "$GIT_COMMIT" ]; then
