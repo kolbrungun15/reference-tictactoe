@@ -77,11 +77,11 @@ if [[ $rc != 0 ]] ; then
 fi
 
 #pushar inn á docker
-sudo docker push kollagunn/tictactoe:$GIT_COMMIT
-rc=$?
-if [[ $rc != 0 ]] ; then
-    echo "Docker push failed " $rc
-   exit $rc
-fi
+#sudo docker push kollagunn/tictactoe:$GIT_COMMIT
+#rc=$?
+#if [[ $rc != 0 ]] ; then
+#    echo "Docker push failed " $rc
+#   exit $rc
+#fi
 
 echo "Done"
