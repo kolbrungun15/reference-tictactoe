@@ -224,7 +224,7 @@ describe('place a move command', function () {
             }];
     });
 
-    it('should mark grid[1,1] with X, MovePlaced', function () {
+    it('should mark grid[2,2] with O, MovePlaced', function () {
             given = [{
             type: "GameCreated",
             user: {
@@ -240,30 +240,40 @@ describe('place a move command', function () {
             },
             name: "TheFirstGame",
             timeStamp: "2014-12-02T11:29:29"
+        },
+        {
+            type: "MovePlaced",
+                user: {
+                    userName: "duddiBacon"
+                },
+                name: "TheFirstGame",
+                timeStamp: "2014-12-02T11:30:29",
+                pos: 0,
+                side:'X'
         }];
         when = 
             {
                 type: "PlaceMove",
                 user: {
-                    userName: "duddiBacon"
+                    userName: "Kolla"
                 },
                 name: "TheFirstGame",
                 timeStamp: "2014-12-02T11:30:29",
-                pos: 4,
-                side:'X'
+                pos: 9,
+                side:'O'
             };
         then = [
             {
                 type: "MovePlaced",
                 user: {
-                    userName: "duddiBacon"
+                    userName: "Kolla"
                 },
                 name: "TheFirstGame",
                 timeStamp: "2014-12-02T11:30:29",
-                pos: 4,
-                side: 'X'
+                pos: 9,
+                side: 'O'
             }];
-});
+    });
     it('should emit IllegalMove when square occupied', function () {
 
     });
