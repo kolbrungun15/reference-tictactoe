@@ -102,6 +102,7 @@ describe('join game command', function () {
             timeStamp: "2014-12-02T11:29:29"
         }
         ];
+
         when =
         {
             type: "JoinGame",
@@ -111,6 +112,7 @@ describe('join game command', function () {
             name: "TheFirstGame",
             timeStamp: "2014-12-02T11:29:29"
         };
+
         then = [
             {
                 type: "GameJoined",
@@ -120,8 +122,7 @@ describe('join game command', function () {
                 name: "TheFirstGame",
                 timeStamp: "2014-12-02T11:29:29",
                 side:'O'
-            }
-        ];
+            }];
 
     });
 });
@@ -151,6 +152,7 @@ describe('place a move command', function () {
             name: "TheFirstGame",
             timeStamp: "2014-12-02T11:29:29"
         },
+
         {
             type: "GameJoined",
             user: {
@@ -160,7 +162,7 @@ describe('place a move command', function () {
             timeStamp: "2014-12-02T11:29:29"
         }];
 
-        when = [{
+        when = {
                 type: "PlaceMove",
                 user: {
                     userName: "duddiBacon"
@@ -169,7 +171,8 @@ describe('place a move command', function () {
                 timeStamp: "2014-12-02T11:30:29",
                 pos: 0,
                 side:'X'
-            }];
+            };
+
         then = [
             {
                 type: "MovePlaced",
@@ -184,7 +187,7 @@ describe('place a move command', function () {
     });
 
     it('should mark grid[1,1] with X, MovePlaced', function () {
-            given = [{
+        given = [{
             type: "GameCreated",
             user: {
                 userName: "duddiBacon"
@@ -192,6 +195,7 @@ describe('place a move command', function () {
             name: "TheFirstGame",
             timeStamp: "2014-12-02T11:29:29"
         },
+
         {
             type: "GameJoined",
             user: {
@@ -200,6 +204,7 @@ describe('place a move command', function () {
             name: "TheFirstGame",
             timeStamp: "2014-12-02T11:29:29"
         }];
+
         when = 
             {
                 type: "PlaceMove",
@@ -211,6 +216,7 @@ describe('place a move command', function () {
                 pos: 4,
                 side:'X'
             };
+
         then = [
             {
                 type: "MovePlaced",
@@ -233,6 +239,7 @@ describe('place a move command', function () {
             name: "TheFirstGame",
             timeStamp: "2014-12-02T11:29:29"
         },
+
         {
             type: "GameJoined",
             user: {
@@ -241,6 +248,7 @@ describe('place a move command', function () {
             name: "TheFirstGame",
             timeStamp: "2014-12-02T11:29:29"
         },
+
         {
             type: "MovePlaced",
                 user: {
@@ -262,6 +270,7 @@ describe('place a move command', function () {
                 pos: 9,
                 side:'O'
             };
+
         then = [
             {
                 type: "MovePlaced",
@@ -274,7 +283,61 @@ describe('place a move command', function () {
                 side: 'O'
             }];
     });
+
     it('should emit IllegalMove when square occupied', function () {
+        given = [
+            {
+                type: "GameCreated",
+                user: {
+                    userName: "duddiBacon"
+                },
+                name: "TheFirstGame",
+                timeStamp: "2014-12-02T11:29:29"
+            },
+
+            {
+                type: "GameJoined",
+                user: {
+                    userName: "kallikula"
+            },
+                name: "TheFirstGame",
+                timeStamp: "2014-12-02T11:29:29",
+                side:"O"
+            },
+
+            {
+                type: "PlaceMove",
+                user: {
+                    userName: "duddiBacon"
+                },
+                name: "TheFirstGame",
+                timeStamp: "2014-12-02T11:30:29",
+                placeAt: "0",
+                side:"X"
+            }];
+
+        when = [
+            {
+                type: "PlaceMove",
+                user: {
+                    userName: "kallikula"
+                },
+                name: "TheFirstGame",
+                timeStamp: "2014-12-02T11:31:29",
+                placeAt: "0",
+                side:"O"
+            }];
+
+        then = [
+            {
+            type: "IllegalMoveIsOccupied",
+            user: {
+                userName: "kallikula"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:31:29",
+            side:"O"
+        }];
 
     });
     it('should emit NotYourMove if player tries 2 moves in a row', function () {

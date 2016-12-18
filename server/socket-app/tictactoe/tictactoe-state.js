@@ -39,8 +39,13 @@ module.exports = function (injected) {
                 playersTurn = 'X';
             }
         }
+
+        function thisPlayersTurn(side) {
+            return(side == playersTurn);
+        }
+
         //Checks if any of possible wins are true
-        function gameWon(event) {
+        function gameWin(event) {
             if (horizontalWin(event) == true || diagonalWin(event) == true || verticalWin(event) == true) {
                 return true;
             }
@@ -58,16 +63,32 @@ module.exports = function (injected) {
         }
 
         function horizontalWin(event) {
+            for (var i = 0; i < grid.length; i+=3){
+                if (grid[i] == event.side && grid[i+1] == event.side && grid[i+2] == event.side){
+                    return true;
+                }
+            }
             return false;
         } 
 
         function diagonalWin(event) {
+            if (grid[0] == event.side && grid[4] == event.side && grid[8] == event.side){
+                return true;
+            }
+            if (grid[2] == event.side && grid[4] == event.side && grid[6] == event.side){
+                return true;
+            }
             return false;
         } 
 
         function verticalWin(event) {
+            for (var i = 0; i < grid.length-6; i++){
+                if (grid[i] == event.side && grid[i+3] == event.side && grid[i+6] == event.side){
+                    return true;
+                }
+            }
             return false;
-        }
+}
 
 
         processEvents(history);
@@ -76,7 +97,7 @@ module.exports = function (injected) {
             gameFull:gameFull,
             processEvents:processEvents,
             occupiedPos:occupiedPos,
-            gameWon:gameWon,
+            gameWin:gameWin,
             gameDraw:gameDraw
         }
     };
