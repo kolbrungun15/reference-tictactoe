@@ -47,11 +47,7 @@ module.exports = function (injected) {
             }
             return false;
         }
-/*
-        function thisPlayersTurn(side) {
-            return(side == playersTurn);
-        }
-*/
+
         //Checks if any of possible wins are true
         function gameWin(event) {
             if (horizontalWin(event) == true || diagonalWin(event) == true || verticalWin(event) == true) {

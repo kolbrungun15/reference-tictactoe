@@ -312,7 +312,7 @@ describe('place a move command', function () {
                 },
                 name: "TheFirstGame",
                 timeStamp: "2014-12-02T11:30:29",
-                placeAt: "0",
+                pos: "0",
                 side:"X"
             }];
 
@@ -324,7 +324,7 @@ describe('place a move command', function () {
                 },
                 name: "TheFirstGame",
                 timeStamp: "2014-12-02T11:31:29",
-                placeAt: "0",
+                pos: "0",
                 side:"O"
             }];
 
@@ -340,6 +340,7 @@ describe('place a move command', function () {
         }];
 
     });
+
     it('should emit NotYourMove if player tries 2 moves in a row', function () {
         given = [
         {
@@ -392,6 +393,7 @@ describe('place a move command', function () {
             side:"X"
         }];
     });
+
      it('should emit gameWin on ***', function () {
         given = [
         {
@@ -472,11 +474,248 @@ describe('place a move command', function () {
             timeStamp: "2014-12-02T11:30:29",
             side:"X"
         }];
-});
-    it('should NOT emit gameDraw if last move was win', function () {
-
     });
-    it('should emit gameDraw if neither wins', function () {
 
+      it('should NOT emit gameDraw if last move was win', function () {
+        given = [
+        {
+            type: "GameCreated",
+            user: {
+                userName: "duddiBacon"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:29:29"
+        },
+        {
+            type: "GameJoined",
+            user: {
+                userName: "kallikula"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:29:29",
+            side:"O"
+        },
+        {
+            type: "MovePlaced",
+            user: {
+                userName: "duddiBacon"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:30:29",
+            pos: "0",
+            side:"X"
+        },
+        {
+            type: "MovePlaced",
+            user: {
+                userName: "kallikula"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:30:29",
+            pos: "1",
+            side:"O"
+        },
+        {
+            type: "MovePlaced",
+            user: {
+                userName: "duddiBacon"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:30:29",
+            pos: "2",
+            side:"X"
+        },
+        {
+            type: "MovePlaced",
+            user: {
+                userName: "kallikula"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:30:29",
+            pos: "3",
+            side:"O"
+        },
+        {
+            type: "MovePlaced",
+            user: {
+                userName: "duddiBacon"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:30:29",
+            pos: "4",
+            side:"X"
+        },
+        {
+            type: "MovePlaced",
+            user: {
+                userName: "kallikula"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:30:29",
+            pos: "5",
+            side:"O"
+        },
+        {
+            type: "MovePlaced",
+            user: {
+                userName: "duddiBacon"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:30:29",
+            pos: "6",
+            side:"X"
+        },
+        {
+            type: "MovePlaced",
+            user: {
+                userName: "kallikula"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:30:29",
+            pos: "7",
+            side:"O"
+        }];
+        when =
+        {
+            type: "PlaceMove",
+            user: {
+                userName: "duddiBacon"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:31:29",
+            pos: "8",
+            side:"X"
+        };
+        then = [
+        {
+            type: "GameWin",
+            user: {
+                userName: "duddiBacon"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:31:29",
+            side:"X"
+        }];
+    });
+
+     it('should emit gameDraw if neither wins', function () {
+        given = [
+        {
+            type: "GameCreated",
+            user: {
+                userName: "duddiBacon"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:29:29"
+        },
+        {
+            type: "GameJoined",
+            user: {
+                userName: "kallikula"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:29:29",
+            side:"O"
+        },
+        {
+            type: "MovePlaced",
+            user: {
+                userName: "duddiBacon"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:30:29",
+            pos: "0",
+            side:"X"
+        },
+        {
+            type: "MovePlaced",
+            user: {
+                userName: "kallikula"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:30:29",
+            pos: "2",
+            side:"O"
+        },
+        {
+            type: "MovePlaced",
+            user: {
+                userName: "duddiBacon"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:30:29",
+            pos: "5",
+            side:"X"
+        },
+        {
+            type: "MovePlaced",
+            user: {
+                userName: "kallikula"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:30:29",
+            pos: "1",
+            side:"O"
+        },
+        {
+            type: "MovePlaced",
+            user: {
+                userName: "duddiBacon"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:30:29",
+            pos: "4",
+            side:"X"
+        },
+        {
+            type: "MovePlaced",
+            user: {
+                userName: "kallikula"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:30:29",
+            pos: "3",
+            side:"O"
+        },
+        {
+            type: "MovePlaced",
+            user: {
+                userName: "duddiBacon"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:30:29",
+            pos: "7",
+            side:"X"
+        },
+        {
+            type: "MovePlaced",
+            user: {
+                userName: "kallikula"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:30:29",
+            pos: "8",
+            side:"O"
+        }];
+        when =
+        {
+            type: "PlaceMove",
+            user: {
+                userName: "duddiBacon"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:31:29",
+            pos: "6",
+            side:"X"
+        };
+        then = [
+        {
+            type: "GameDraw",
+            user: {
+                userName: "duddiBacon"
+            },           
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:31:29",
+        }];
     });
 });
