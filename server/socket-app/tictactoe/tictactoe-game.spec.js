@@ -182,9 +182,48 @@ describe('place a move command', function () {
                 side: 'X'
             }];
     }
+    
     it('should mark grid[1,1] with X, MovePlaced', function () {
+            given = [{
+            type: "GameCreated",
+            user: {
+                userName: "TheGuy"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:29:29"
+        },
+        {
+            type: "GameJoined",
+            user: {
+                userName: "Gummi"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:29:29"
+        }];
+        when = 
+            {
+                type: "PlaceMove",
+                user: {
+                    userName: "TheGuy"
+                },
+                name: "TheFirstGame",
+                timeStamp: "2014-12-02T11:30:29",
+                pos: 4,
+                side:'X'
+            };
+        then = [
+            {
+                type: "MovePlaced",
+                user: {
+                    userName: "TheGuy"
+                },
+                name: "TheFirstGame",
+                timeStamp: "2014-12-02T11:30:29",
+                pos: 4,
+                side: 'X'
+            }];
+    });
 
-    }
     it('should mark grid[2,2] with O, MovePlaced', function () {
 
     }

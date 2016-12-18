@@ -9,7 +9,7 @@ services:
     image: 'kollagunn/tictactoe'
     ports:
       - '3000:3000'
-      - '8080:8080'
+      #- '8080:8080'
     depends_on:
       - 'postgres'
   postgres:
