@@ -160,7 +160,8 @@ describe('place a move command', function () {
             name: "TheFirstGame",
             timeStamp: "2014-12-02T11:29:29"
         }];
-        when {
+
+        when = [{
                 type: "PlaceMove",
                 user: {
                     userName: "TheGuy"
@@ -169,7 +170,7 @@ describe('place a move command', function () {
                 timeStamp: "2014-12-02T11:30:29",
                 pos: 0,
                 side:'X'
-            };
+            }];
         then = [
             {
                 type: "MovePlaced",
@@ -181,8 +182,8 @@ describe('place a move command', function () {
                 pos: 0,
                 side: 'X'
             }];
-    }
-    
+    });
+
     it('should mark grid[1,1] with X, MovePlaced', function () {
             given = [{
             type: "GameCreated",
@@ -226,20 +227,20 @@ describe('place a move command', function () {
 
     it('should mark grid[2,2] with O, MovePlaced', function () {
 
-    }
+    });
     it('should emit IllegalMove when square occupied', function () {
 
-    }
+    });
     it('should emit NotYourMove if player tries 2 moves in a row', function () {
 
-    }
+    });
     it('should emit gameWon on ***', function () {
 
-    }
+    });
     it('should NOT emit gameDraw if last move was win', function () {
 
-    }
+    });
     it('should emit gameDraw if neither wins', function () {
 
-}
-}
+    });
+});

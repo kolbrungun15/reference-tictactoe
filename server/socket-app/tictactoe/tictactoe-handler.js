@@ -43,14 +43,21 @@ module.exports = function(injected){
                         }]);
                     },
                     "PlaceMove": function(cmd){
+                        if(gameState.occupiedPos(cmd.pos)){
+                            eventHandler( [{
+                                gameId: cmd.gameId,
+                                type: "IllegalMove",
+                                user: cmd.user,
+                                name: cmd.name,
+                                timeStamp: cmd.timeStamp,
+                                pos: cmd.pos
+                            }]);
+                            return;
+                        }
 
-                        // Check here for conditions which prevent command from altering state
+                        eventHandler(event);
+                    }    
 
-                        gameState.processEvents(events);
-
-                        // Check here for conditions which may warrant additional events to be emitted.
-                        eventHandler(events);
-                    }
                 };
 
                 if(!cmdHandlers[cmd.type]){

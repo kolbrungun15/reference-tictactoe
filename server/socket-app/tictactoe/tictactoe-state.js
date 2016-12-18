@@ -4,7 +4,7 @@ module.exports = function (injected) {
 
     return function (history) {
 
-        var gameFull = false; //in beginning game not full
+        var isFull = false; //in beginning game not full
         var grid = new Array(9); //Gameboard exists as 3x3 array
         var playersTurn = 'X';
 
@@ -24,7 +24,7 @@ module.exports = function (injected) {
         }
  
          function gameFull() {
-            return gameFull;
+            return isFull;
         }
 
         function occupiedPos(pos) {
