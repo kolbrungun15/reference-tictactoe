@@ -306,7 +306,7 @@ describe('place a move command', function () {
             },
 
             {
-                type: "PlaceMove",
+                type: "MovePlaced",
                 user: {
                     userName: "duddiBacon"
                 },
@@ -330,7 +330,7 @@ describe('place a move command', function () {
 
         then = [
             {
-            type: "IllegalMoveIsOccupied",
+            type: "IllegalMove",
             user: {
                 userName: "kallikula"
             },
@@ -341,8 +341,57 @@ describe('place a move command', function () {
 
     });
     it('should emit NotYourMove if player tries 2 moves in a row', function () {
-
-    });
+        given = [
+        {
+            type: "GameCreated",
+            user: {
+                userName: "duddiBacon"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:29:29"
+        },
+        {
+            type: "GameJoined",
+            user: {
+                userName: "kallikula"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:29:29",
+            side:"O"
+        },
+        {
+            type: "MovePlaced",
+            user: {
+                userName: "duddiBacon"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:30:29",
+            pos: "0",
+            side:"X"
+        }
+        ];
+        when =
+        {
+            type: "PlaceMove",
+            user: {
+                userName: "kallikula"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:31:29",
+            pos: "4",
+            side:"X"
+        };
+        then = [
+        {
+            type: "NotYourMove",
+            user: {
+                userName: "kallikula"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:31:29",
+            side:"X"
+        }];
+});
     it('should emit gameWon on ***', function () {
 
     });

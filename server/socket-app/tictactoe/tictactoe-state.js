@@ -15,8 +15,9 @@ module.exports = function (injected) {
 
             if(event.type == "MovePlaced") {
                 grid[event.pos] = event.side //make mark
-            }
+            
             swapPlayers();
+            }
         }
 
         function processEvents(history) {
@@ -40,10 +41,17 @@ module.exports = function (injected) {
             }
         }
 
+        function currentPlayer(side) {
+            if(side == playersTurn){
+                return true;
+            }
+            return false;
+        }
+/*
         function thisPlayersTurn(side) {
             return(side == playersTurn);
         }
-
+*/
         //Checks if any of possible wins are true
         function gameWin(event) {
             if (horizontalWin(event) == true || diagonalWin(event) == true || verticalWin(event) == true) {
@@ -88,7 +96,7 @@ module.exports = function (injected) {
                 }
             }
             return false;
-}
+        }
 
 
         processEvents(history);
@@ -97,6 +105,7 @@ module.exports = function (injected) {
             gameFull:gameFull,
             processEvents:processEvents,
             occupiedPos:occupiedPos,
+            currentPlayer:currentPlayer,
             gameWin:gameWin,
             gameDraw:gameDraw
         }

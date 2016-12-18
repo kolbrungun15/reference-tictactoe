@@ -1,3 +1,4 @@
+
 module.exports = function(injected){
     var TictactoeState = injected('TictactoeState');
 
@@ -22,7 +23,7 @@ module.exports = function(injected){
                     },
                     "JoinGame": function (cmd) {
                         if(gameState.gameFull()){
-                            eventHandler( [{
+                            eventHandler([{
                                 gameId: cmd.gameId,
                                 type: "FullGameJoinAttempted",
                                 user: cmd.user,
@@ -42,6 +43,19 @@ module.exports = function(injected){
                         }]);
                     },
                     "PlaceMove": function(cmd){
+
+                        if(!gameState.currentPlayer(cmd.side)){
+                            eventHandler([{
+                                gameId: cmd.gameId,
+                                type: "NotYourMove",
+                                user: cmd.user,
+                                name: cmd.name,
+                                timeStamp: cmd.timeStamp,
+                                side: cmd.side
+                            }]);
+                            return;
+                        }
+                        
                         if(gameState.occupiedPos(cmd.pos)){
                             eventHandler([{
                                 gameId: cmd.gameId,
@@ -54,18 +68,6 @@ module.exports = function(injected){
                             return;
                        }
 
-                       if(gameState.thisPlayersTurn(cmd.side) == false){
-                            eventHandler([{
-                                gameId: cmd.gameId,
-                                type: "OutOfTurnMoveAttempted",
-                                user: cmd.user,
-                                name: cmd.name,
-                                timeStamp: cmd.timeStamp,
-                                side: cmd.side
-                            }]);
-                            return;
-                        }
-                        
                         var event = [{
                             gameId: cmd.gameId,
                             type: "MovePlaced",
@@ -77,16 +79,15 @@ module.exports = function(injected){
                         }];
                         gameState.processEvents(event);
 
-
                         if(gameState.gameWin(cmd)){
-                            event.push({
+                            eventHandler([{
                                 gameId: cmd.gameId,
                                 type: "GameWon",
                                 user: cmd.user,
                                 name: cmd.name,
                                 timeStamp: cmd.timeStamp,
                                 side: cmd.side
-                            });
+                            }]);
                             return;
                         }
 
@@ -101,14 +102,13 @@ module.exports = function(injected){
                             return;
                         }
                     }
-
                 };
-                if(!cmdHandlers[cmd.type]){
-                    throw new Error("I do not handle command of type " + cmd.type)
-                }
+                    if(!cmdHandlers[cmd.type]){
+                        throw new Error("I do not handle command of type " + cmd.type)
+                    }
 
-                cmdHandlers[cmd.type](cmd);
+                    cmdHandlers[cmd.type](cmd);
             }
         }
     }
-};
+};                
