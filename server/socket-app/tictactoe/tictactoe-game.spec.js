@@ -391,10 +391,88 @@ describe('place a move command', function () {
             timeStamp: "2014-12-02T11:31:29",
             side:"X"
         }];
-});
-    it('should emit gameWon on ***', function () {
-
     });
+     it('should emit gameWin on ***', function () {
+        given = [
+        {
+            type: "GameCreated",
+            user: {
+                userName: "duddiBacon"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:29:29"
+        },
+        {
+            type: "GameJoined",
+            user: {
+                userName: "kallikula"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:29:29",
+            side:"O"
+        },
+        {
+            type: "MovePlaced",
+            user: {
+                userName: "duddiBacon"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:31:29",
+            pos: "0",
+            side:"X"
+        },
+        {
+            type: "MovePlaced",
+            user: {
+                userName: "kallikula"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:30:29",
+            pos: "3",
+            side:"O"
+        },
+        {
+            type: "MovePlaced",
+            user: {
+                userName: "duddiBacon"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:30:29",
+            pos: "1",
+            side:"X"
+        },
+        {
+            type: "MovePlaced",
+            user: {
+                userName: "kallikula"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:30:29",
+            pos: "4",
+            side:"O"
+        }];
+        when = 
+            {
+            type: "PlaceMove",
+            user: {
+                userName: "duddiBacon"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:30:29",
+            pos: "2",
+            side:"X"
+        };
+        then = [
+        {
+            type: "GameWin",
+            user: {
+                userName: "duddiBacon"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:30:29",
+            side:"X"
+        }];
+});
     it('should NOT emit gameDraw if last move was win', function () {
 
     });

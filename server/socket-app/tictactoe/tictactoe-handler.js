@@ -82,7 +82,7 @@ module.exports = function(injected){
                         if(gameState.gameWin(cmd)){
                             eventHandler([{
                                 gameId: cmd.gameId,
-                                type: "GameWon",
+                                type: "GameWin",
                                 user: cmd.user,
                                 name: cmd.name,
                                 timeStamp: cmd.timeStamp,
