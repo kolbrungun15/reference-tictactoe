@@ -10,7 +10,7 @@ var tictactoe = require('./tictactoe-handler')(inject({
 var createEvent = {
     type: "GameCreated",
     user: {
-        userName: "TheGuy"
+        userName: "duddiBacon"
     },
     name: "TheFirstGame",
     timeStamp: "2014-12-02T11:29:29"
@@ -19,7 +19,7 @@ var createEvent = {
 var joinEvent = {
     type: "GameJoined",
     user: {
-        userName: "Gummi"
+        userName: "kallikula"
     },
     name: "TheFirstGame",
     timeStamp: "2014-12-02T11:29:29"
@@ -52,7 +52,7 @@ describe('create game command', function() {
             id:"123987",
             type: "CreateGame",
             user: {
-                userName: "TheGuy"
+                userName: "duddiBacon"
             },
             name: "TheFirstGame",
             timeStamp: "2014-12-02T11:29:29"
@@ -61,7 +61,7 @@ describe('create game command', function() {
             {
                 type: "GameCreated",
                 user: {
-                    userName: "TheGuy"
+                    userName: "duddiBacon"
                 },
                 name: "TheFirstGame",
                 timeStamp: "2014-12-02T11:29:29",
@@ -96,7 +96,7 @@ describe('join game command', function () {
         given = [{
             type: "GameCreated",
             user: {
-                userName: "TheGuy"
+                userName: "duddiBacon"
             },
             name: "TheFirstGame",
             timeStamp: "2014-12-02T11:29:29"
@@ -106,7 +106,7 @@ describe('join game command', function () {
         {
             type: "JoinGame",
             user: {
-                userName: "Gummi"
+                userName: "kallikula"
             },
             name: "TheFirstGame",
             timeStamp: "2014-12-02T11:29:29"
@@ -115,7 +115,7 @@ describe('join game command', function () {
             {
                 type: "GameJoined",
                 user: {
-                    userName: "Gummi"
+                    userName: "kallikula"
                 },
                 name: "TheFirstGame",
                 timeStamp: "2014-12-02T11:29:29",
@@ -126,7 +126,6 @@ describe('join game command', function () {
     });
 });
 
-/**************** Unit Tests For Placing moves *********************************/
 
 describe('place a move command', function () {
     var given, when, then;
@@ -147,7 +146,7 @@ describe('place a move command', function () {
         given = [{
             type: "GameCreated",
             user: {
-                userName: "TheGuy"
+                userName: "duddiBacon"
             },
             name: "TheFirstGame",
             timeStamp: "2014-12-02T11:29:29"
@@ -155,7 +154,7 @@ describe('place a move command', function () {
         {
             type: "GameJoined",
             user: {
-                userName: "Gummi"
+                userName: "kallikula"
             },
             name: "TheFirstGame",
             timeStamp: "2014-12-02T11:29:29"
@@ -164,7 +163,7 @@ describe('place a move command', function () {
         when = [{
                 type: "PlaceMove",
                 user: {
-                    userName: "TheGuy"
+                    userName: "duddiBacon"
                 },
                 name: "TheFirstGame",
                 timeStamp: "2014-12-02T11:30:29",
@@ -175,7 +174,7 @@ describe('place a move command', function () {
             {
                 type: "MovePlaced",
                 user: {
-                    userName: "TheGuy"
+                    userName: "duddiBacon"
                 },
                 name: "TheFirstGame",
                 timeStamp: "2014-12-02T11:30:29",
@@ -188,7 +187,7 @@ describe('place a move command', function () {
             given = [{
             type: "GameCreated",
             user: {
-                userName: "TheGuy"
+                userName: "duddiBacon"
             },
             name: "TheFirstGame",
             timeStamp: "2014-12-02T11:29:29"
@@ -196,7 +195,7 @@ describe('place a move command', function () {
         {
             type: "GameJoined",
             user: {
-                userName: "Gummi"
+                userName: "kallikula"
             },
             name: "TheFirstGame",
             timeStamp: "2014-12-02T11:29:29"
@@ -205,7 +204,7 @@ describe('place a move command', function () {
             {
                 type: "PlaceMove",
                 user: {
-                    userName: "TheGuy"
+                    userName: "duddiBacon"
                 },
                 name: "TheFirstGame",
                 timeStamp: "2014-12-02T11:30:29",
@@ -216,7 +215,7 @@ describe('place a move command', function () {
             {
                 type: "MovePlaced",
                 user: {
-                    userName: "TheGuy"
+                    userName: "duddiBacon"
                 },
                 name: "TheFirstGame",
                 timeStamp: "2014-12-02T11:30:29",
