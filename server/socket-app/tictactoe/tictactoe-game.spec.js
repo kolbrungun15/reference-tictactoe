@@ -126,4 +126,81 @@ describe('join game command', function () {
     });
 });
 
+/**************** Unit Tests For Placing moves *********************************/
 
+describe('place a move command', function () {
+    var given, when, then;
+
+    beforeEach(function () {
+        given = undefined;
+        when = undefined;
+        then = undefined;
+    });
+
+    afterEach(function () {
+        tictactoe(given).executeCommand(when, function (actualEvents) {
+            should(JSON.stringify(actualEvents)).be.exactly(JSON.stringify(then));
+        });
+    });
+
+    it('should mark grid[0,0] with X, MovePlaced', function () {
+        given = [{
+            type: "GameCreated",
+            user: {
+                userName: "TheGuy"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:29:29"
+        },
+        {
+            type: "GameJoined",
+            user: {
+                userName: "Gummi"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:29:29"
+        }];
+        when {
+                type: "PlaceMove",
+                user: {
+                    userName: "TheGuy"
+                },
+                name: "TheFirstGame",
+                timeStamp: "2014-12-02T11:30:29",
+                pos: 0,
+                side:'X'
+            };
+        then = [
+            {
+                type: "MovePlaced",
+                user: {
+                    userName: "TheGuy"
+                },
+                name: "TheFirstGame",
+                timeStamp: "2014-12-02T11:30:29",
+                pos: 0,
+                side: 'X'
+            }];
+    }
+    it('should mark grid[1,1] with X, MovePlaced', function () {
+
+    }
+    it('should mark grid[2,2] with O, MovePlaced', function () {
+
+    }
+    it('should emit IllegalMove when square occupied', function () {
+
+    }
+    it('should emit NotYourMove if player tries 2 moves in a row', function () {
+
+    }
+    it('should emit gameWon on ***', function () {
+
+    }
+    it('should NOT emit gameDraw if last move was win', function () {
+
+    }
+    it('should emit gameDraw if neither wins', function () {
+
+}
+}
